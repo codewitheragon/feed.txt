@@ -1,15 +1,14 @@
-# The feed.txt Format
-A human-centric, plain-text format for chronological logging.
+# feed.txt: The Flight Recorder for your Life
+**A human-centric, plain-text format for capturing your daily momentum.**
 
-The first and most important rule of `feed.txt`:
-**Every entry occupies exactly one line and begins with a full timestamp.**
+`feed.txt` is a simple, sortable, and future-proof system for documenting your breakthroughs, daily rhythms, and the evolution of your thoughts. 
+
+While most productivity tools focus on the **"Anxiety of the Unfinished"** (the to-do list), `feed.txt` celebrates the **"Presence of Execution."** It is a **Living Ledger**—a durable record designed to turn your daily activity into a searchable, permanent legacy of growth.
 
 ---
 
-## 1. Why feed.txt?
-Most productivity tools focus on the "Anxiety of the Unfinished" (the to-do list). `feed.txt` celebrates the **Joy of the Accomplished**. 
-
-It is a "flight recorder" for your thoughts and actions—an append-only ledger designed to turn your daily momentum into a searchable, permanent legacy of growth.
+## 1. Philosophy: Momentum over Debt
+In traditional task management, a "completed" task disappears. This leaves you with a deficit—a mountain of unfinished work and no visible record of your wins. `feed.txt` reverses this. It replaces future anxiety with a chronological proof of execution.
 
 | Feature | The Feed | The Todo List |
 | :--- | :--- | :--- |
@@ -20,75 +19,68 @@ It is a "flight recorder" for your thoughts and actions—an append-only ledger 
 
 ---
 
-## 2. Format Rules
-To ensure your feed is both human-readable and machine-sortable, follow these five simple rules.
+## 2. The 3 Axes of a Living Ledger
+Using the `feed.txt` notation, you create a log that is sliceable by 3 key axes:
 
-### Rule 1: One line per entry
-A single line in your text file represents a single log entry.
+### I. The Temporal Anchor (Time)
+Your feed tells you exactly *when* an insight or achievement occurred. Every entry is anchored to a specific moment, creating a perfect chronological thread that never breaks across devices or years.
 
-### Rule 2: The Temporal Anchor
-Every line must begin with a date and time in `YYYY-MM-DD HH:MM` format.
-*Example:* `2026-06-08 14:30`
-*Why:* This ensures a simple alphabetical sort matches the chronological order of your life.
+### II. The Four Modalities (Sigils)
+A single character defines the *cognitive mode* of the entry. This limits choices to prevent decision paralysis and ensures your log reflects the nature of your day:
+*   `.` **The Pulse:** Your daily rhythm. Facts, routine updates, and steady progress.
+*   `!` **The Spark:** Your wins! Breakthroughs, core memories, and major achievements.
+*   `?` **The Inquiry:** Your curiosity. Active questions and unsolved problems.
+*   `~` **The Flow:** Your raw creativity. Unfiltered thoughts and experimental ideas.
 
-### Rule 3: The Modality Sigil
-Immediately following the timestamp and a single space, a single character defines the "mode" of the entry:
-*   `.` **The Pulse:** Routine events, objective facts, and daily rhythms.
-*   `!` **The Spark:** Wins, breakthroughs, and major milestones.
-*   `?` **The Inquiry:** Curiosity, questions, and unsolved problems.
-*   `~` **The Flow:** Raw creativity, unfiltered thoughts, and ephemeral ideas.
-
-### Rule 4: The Record (Prose)
-The descriptive text follows the sigil and a single space. It can contain any UTF-8 characters but **must not** contain newlines.
-
-### Rule 5: Tags and Metadata
-Structured extensions should be placed at the end of the line:
-*   **Hashtags:** Preceded by a `#` for categorization (e.g., `#work`, `#health`).
-*   **Key:Value pairs:** Use `key:value` for numeric or state tracking (e.g., `dist:5km`, `ups:60`).
+### III. The Context (Metadata)
+Extend your log with structured data without cluttering the prose. Use `#tags` for categorization and `key:value` pairs to link your daily log to external documents, projects, or performance metrics.
 
 ---
 
-## 3. Quickstart Tooling (Reference CLI)
+## 3. Features for the Long Haul
 
-To make logging instant, add these functions to your `.bashrc` or `.zshrc`. This removes the friction of manual timestamping.
+### The "Living Ledger" (Editing Allowed)
+Unlike a blockchain or a system log, `feed.txt` is a personal document. You are encouraged to edit, refine, and prune your entries. Typo in a breakthrough? Missing a tag from three days ago? Just open the file and fix it.
 
-```bash
-# Core logging function
-feed() {
-  local sigil=$1
-  shift
-  echo "$(date +'%Y-%m-%d %H:%M') $sigil $*" >> ~/feed.txt
-}
+### The Trash Convention
+To keep your feed clean without destroying history, `feed.txt` uses the `#trash` convention. Simply append `#trash` to any entry to mark it as stale or deprecated. This allows your tools to filter out noise while preserving the "archaeological" record of what you once thought.
 
-# Modality shortcuts
-alias pulse='feed .'
-alias spark='feed !'
-alias ask='feed ?'
-alias flow='feed ~'
+### Deep Linking & Threading
+Using reserved keys like `ref:`, `id:`, and `par:`, you can create a graph of your thoughts. Link a "Spark" back to the "Inquiry" that triggered it, or point an entry to an external essay or project folder.
+
+---
+
+## 4. The Format Rules
+Your `feed.txt` is a standard UTF-8 plain text file. To ensure it remains human-readable for decades and instantly sortable by machines, follow these five simple rules.
+
+1.  **Strictly Single-Line:** One entry per line. No newlines allowed.
+2.  **Timestamps First:** Every line MUST begin with `YYYY-MM-DD HH:MM`.
+3.  **Sigil follows Timestamp:** A single space, then your modality character (`.`, `!`, `?`, or `~`).
+4.  **Prose follows Sigil:** Your free-form text comes after the sigil and a space.
+5.  **Metadata at the End:** All tags and key:value pairs must be appended at the end of the line.
+
+---
+
+## 5. Examples
+### The Feed in Action
+```text
+2026-06-08 07:15 . Morning yoga focus on hip mobility. #health
+2026-06-08 08:45 ! Milestone: The new sandbox build is live and stable. #ship-it
+2026-06-08 10:15 ~ Thinking about the intersection of CLI and AI. #ideas
+2026-06-08 12:30 ? How can I improve the latency of the packet parser? #growth
+2026-06-08 21:10 ! Shared a beautiful dinner to celebrate our anniversary. #life
+2026-06-09 09:00 . Old routine check. #trash
 ```
 
-**Usage:**
-`spark Fixed the race condition in the scheduler! #work`
+---
+
+## 6. Tooling & Implementation
+While `feed.txt` can be managed in any text editor, it is designed for a zero-friction CLI experience.
+
+*   **Reference CLI:** See `feed.py` for a Python implementation with logging and stats.
+*   **Formal Specification:** See [SPEC.md](SPEC.md) for the formal EBNF grammar and parsing rules.
 
 ---
 
-## 4. FAQ (Why not...?)
-
-### Why not just use todo.txt?
-`todo.txt` manages your **debt** (what you haven't done). `feed.txt` manages your **assets** (what you have done). They are perfect companions: use one to plan your day, and the other to record your progress.
-
-### Why not a digital journal or Obsidian?
-`feed.txt` is built for **zero-friction capture**. Opening an app or navigating folders is a barrier for a 5-second thought. `feed.txt` lives in your terminal and is 100% portable—a single file that will be readable for decades.
-
-### Why the specific date format?
-`YYYY-MM-DD HH:MM` ensures that a standard alphabetical sort (the default for text tools and file systems) is identical to a chronological sort.
-
----
-
-## 5. Example File
-See [sample-feed.txt](sample-feed.txt) for a real-world example of a lived-in feed.
-
----
-
-## 6. Acknowledgments
+## Acknowledgments
 `feed.txt` stands on the shoulders of giants: Gina Trapani’s `todo.txt`, Ryder Carroll’s *Bullet Journal*, and the timeless Unix philosophy of "simple tools, working together."
