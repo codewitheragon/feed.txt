@@ -29,11 +29,16 @@ newline        ::= "\n"
 ## 3. Parsing Rules
 
 ### 3.1 Right-to-Left (RTL) Metadata Scanning
-To prevent hashtags or colon-separated words within the `record` prose from being incorrectly parsed as metadata, parsers MUST implement an RTL scan.
-1. Start at the end of the line.
-2. Identify tokens (space-separated) that match the `metadata_item` pattern.
-3. The metadata block ends when a token is encountered that does not match the `metadata_item` pattern.
-4. All text to the left of the metadata block (and to the right of the sigil) is the `record`.
+To maintain a clean separation between human prose and machine data, parsers MUST implement an RTL scan. 
+- **Intermingling:** `#tags` and `key:value` pairs can be intermingled in any order within the metadata block.
+- **Termination:** The metadata block ends when a token is encountered that is neither a tag nor a valid extension.
+- **Quoted Values:** Values containing spaces MUST be wrapped in double quotes (e.g., `title:"My Great Essay"`). Parsers MUST handle these as single atomic tokens.
+
+### 3.2 Robust Extraction Regex
+To safely extract the components of a line, use the following logic:
+1. Identify the metadata block at the end of the string.
+2. Use a regex to capture tags: `(?<=\s|^)#(\S+)`
+3. Use a regex to capture extensions (handling quotes): `(?<=\s|^)([a-zA-Z0-9_-]+):(?:"([^"]*)"|(\S+))`
 
 ### 3.2 Timestamp Invariant
 The timestamp MUST be the first 16 characters of the line. This ensures that a standard alphabetical sort (`LC_ALL=C sort`) is equivalent to a chronological sort.

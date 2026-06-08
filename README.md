@@ -58,6 +58,9 @@ Your `feed.txt` is a standard UTF-8 plain text file. To ensure it remains human-
 3.  **Sigil follows Timestamp:** A single space, then your modality character (`.`, `!`, `?`, or `~`).
 4.  **Prose follows Sigil:** Your free-form text comes after the sigil and a space.
 5.  **Metadata at the End:** All tags and key:value pairs must be appended at the end of the line.
+    *   **Intermingling:** `#tags` and `key:value` pairs can be intermingled in any order.
+    *   **Multi-word Values:** Values containing spaces MUST be wrapped in double quotes (e.g., `title:"My Great Essay"`). Otherwise, standard space-delimited parsing applies.
+    *   **The Trash Convention:** To mark an entry as stale or deprecated without losing its original modality, append the **`#trash`** tag.
 
 ---
 
