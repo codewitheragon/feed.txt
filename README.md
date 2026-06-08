@@ -61,16 +61,45 @@ Your `feed.txt` is a standard UTF-8 plain text file. To ensure it remains human-
 
 ---
 
-## 5. ✨ Examples
-### The Feed in Action
+## 5. ✨ The Feed in Action (A Guided Tour)
+
+A `feed.txt` log is designed to be as expressive as it is simple. Here is how a typical day looks when captured through the protocol:
+
+### Capturing the Rhythm
 ```text
 2026-06-08 07:15 . Morning yoga focus on hip mobility. #health
-2026-06-08 08:45 ! Milestone: The new sandbox build is live and stable. #ship-it
-2026-06-08 10:15 ~ Thinking about the intersection of CLI and AI. #ideas
-2026-06-08 12:30 ? How can I improve the latency of the packet parser? #growth
-2026-06-08 21:10 ! Shared a beautiful dinner to celebrate our anniversary. #life
-2026-06-09 09:00 . Old routine check. #trash
 ```
+> **The Pulse:** A standard log of a routine event. The `#health` tag ensures this can be instantly filtered to track wellness consistency over time.
+
+### Recording Breakthroughs
+```text
+2026-06-08 08:45 ! Milestone: The new sandbox build is live and stable. #ship-it
+```
+> **The Spark:** This is the core of the feed. Instead of checking off a task, you are recording a permanent milestone. The `!` sigil makes these entries bubble up in "Achievement Reports."
+
+### Following the Flow
+```text
+2026-06-08 10:15 ~ Thinking about the intersection of CLI and AI. #ideas
+```
+> **The Flow:** Raw creativity. By using the `~` sigil, you give yourself permission to capture "unfiltered" thoughts that aren't yet ready for a formal project.
+
+### Managing Inquiry
+```text
+2026-06-08 12:30 ? How can I improve the latency of the packet parser? #growth ups:60
+```
+> **The Inquiry:** An open question. Note the use of **Key:Value metadata** (`ups:60`) at the end. This entry can be grepped later when you are looking for new project directions.
+
+### Meaningful Moments
+```text
+2026-06-08 21:10 ! Shared a beautiful dinner to celebrate our anniversary. #life
+```
+> **Personal Milestones:** `feed.txt` isn't just for work. It's a flight recorder for your whole life, ensuring your most important memories are never lost in a deleted task list.
+
+### Non-Destructive Pruning
+```text
+2026-06-09 09:00 . Reviewing the old routine. #trash
+```
+> **The Trash Convention:** This entry is marked as stale. It stays in the file for historical context, but your tools will automatically ignore it during your weekly review.
 
 ---
 
